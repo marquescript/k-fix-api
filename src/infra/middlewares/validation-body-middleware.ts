@@ -8,10 +8,15 @@ type ValidatedHandler<S extends ZodSchema> = (
     context: Context
 ) => Promise<APIGatewayProxyResult>;
 
+type MiddlewareWrappedHandler = (
+    event: APIGatewayProxyEvent,
+    context: Context
+) => Promise<APIGatewayProxyResult>
+
 export function validationBodyMiddleware<S extends ZodSchema>(
     schema: S,
     handlerFunction: ValidatedHandler<S>
-): Handler<APIGatewayProxyEvent, APIGatewayProxyResult>{
+): MiddlewareWrappedHandler{
 
     return async (event, context): Promise<APIGatewayProxyResult> => {
         if(!event.body){
