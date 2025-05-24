@@ -1,0 +1,49 @@
+# "org" ensures this Service is used with the correct Serverless Framework Access Key.
+org: carlosmarquesprojects
+# "service" is the name of this project. This will also be added to your AWS resource names.
+service: k-fix-api
+
+provider:
+  name: aws
+  runtime: nodejs20.x
+  region: us-east-1
+
+  #Configurações de HTTP API globai
+  httpApi:
+    cors:
+      allowedOrigins:
+        - 'http://localhost:3000'
+      allowedHeaders:
+        - Content-Type
+        - Authorization
+      allowedMethods:
+        - GET
+        - POST
+        - PUT
+        - DELETE
+        - OPTIONS
+
+plugins:
+  - serverless-dotenv-plugin
+  - serverless-esbuild
+
+custom:
+  commonEnvVars:
+    logLevel: "DEBUG"
+
+  esbuild:
+    bandle: true
+    minify: false
+    sourcemap: true
+    exclude:
+      - aws-sdk
+    platform: node
+    concurrency: 10
+
+  handlerPaths:
+    auth: functions/auth.functions.yml
+    user: functions/user.functions.yml
+
+functions:
+  - ${file(functions/auth.functions.yml)}
+  - ${file(functions/user.functions.yml)}

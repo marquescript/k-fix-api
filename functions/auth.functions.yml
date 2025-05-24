@@ -1,0 +1,14 @@
+
+register:
+    handler: src/infra/handler/auth/register.handler
+    events:
+      - httpApi:
+          path: /register
+          method: post
+
+  login:
+    handler: src/infra/handler/auth/login.handler
+    events:
+      - httpApi:
+          path: /login
+          method: post
