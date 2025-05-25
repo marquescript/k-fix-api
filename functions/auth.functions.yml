@@ -1,18 +1,18 @@
 
 register:
-    handler: src/infra/handler/auth/register.handler
-    layers:
-      - !Ref MongooseLayerLambdaLayer 
-    events:
-      - httpApi:
-          path: /register
-          method: post
+  handler: src/infra/handler/auth/register.handler
+  layers:
+    - !Ref MongooseLayerLambdaLayer 
+  events:
+    - httpApi:
+        path: /register
+        method: post
 
-  login:
-    handler: src/infra/handler/auth/login.handler
-    layers:
-      - !Ref MongooseLayerLambdaLayer
-    events:
-      - httpApi:
-          path: /login
-          method: post
+login:
+  handler: src/infra/handler/auth/login.handler
+  layers:
+    - !Ref MongooseLayerLambdaLayer
+  events:
+    - httpApi:
+        path: /login
+        method: post

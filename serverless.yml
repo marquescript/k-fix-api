@@ -28,6 +28,7 @@ provider:
 plugins:
   - serverless-dotenv-plugin
   - serverless-esbuild
+  - serverless-offline
 
 custom:
   commonEnvVars:
