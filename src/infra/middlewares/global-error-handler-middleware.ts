@@ -13,6 +13,9 @@ export function globalErrorHandlerMiddleware(
 ): AsyncHandler {
 
     return async (event, context): Promise<APIGatewayProxyResult> => {
+        if(context && typeof context.callbackWaitsForEmptyEventLoop !== "undefined") {
+            context.callbackWaitsForEmptyEventLoop = false
+        }
         try{
             return await handlerFunction(event, context);
         }catch(error: unknown){
