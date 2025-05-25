@@ -26,16 +26,18 @@ provider:
         - OPTIONS
 
 plugins:
-  - serverless-dotenv-plugin
   - serverless-esbuild
   - serverless-offline
 
 custom:
   commonEnvVars:
     logLevel: "DEBUG"
+  
+  dotenv:
+    path: .env
 
   esbuild:
-    bandle: true
+    bundle: true
     minify: false
     sourcemap: true
     exclude:
@@ -56,4 +58,4 @@ layers:
 
 functions:
   - ${file(functions/auth.functions.yml)}
-  - ${file(functions/user.functions.yml)}
+  # - ${file(functions/user.functions.yml)}

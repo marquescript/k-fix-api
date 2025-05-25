@@ -1,8 +1,5 @@
 import mongoose, { connect } from "mongoose"
 import { MongoClient, Db } from "mongodb"
-import { config } from "dotenv"
-
-config()
 
 const MONGODB_URI = process.env.MONGODB_URI
 

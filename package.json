@@ -3,13 +3,14 @@
   "version": "1.0.0",
   "description": "",
   "dependencies": {
-    "dotenv": "^16.5.0",
+    "bcryptjs": "^3.0.2",
     "express": "^4.19.2",
+    "jsonwebtoken": "^9.0.2",
     "serverless-http": "^3.2.0",
     "zod": "^3.25.28"
   },
   "scripts": {
-    "start": "sls offline start",
+    "start": "dotenv -e .env -- sls offline start",
     "deploy:dev": "npm run install-layer-deps && sls deploy --stage dev",
     "deploy:prod": "npm run install-layer-deps && sls deploy --stage prod",
     "remove:dev": "sls remove --stage dev",
@@ -17,10 +18,15 @@
   },
   "devDependencies": {
     "@types/aws-lambda": "^8.10.149",
+    "@types/bcryptjs": "^2.4.6",
+    "@types/jsonwebtoken": "^9.0.9",
     "@types/node": "^22.15.21",
+    "dotenv-cli": "^8.0.0",
     "esbuild": "^0.25.4",
     "mongoose": "^8.15.0",
+    "serverless-dotenv-plugin": "^6.0.0",
     "serverless-esbuild": "^1.55.0",
+    "serverless-offline": "^13.3.3",
     "ts-node": "^10.9.2",
     "typescript": "^5.8.3"
   }

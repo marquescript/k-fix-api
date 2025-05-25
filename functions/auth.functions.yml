@@ -1,6 +1,6 @@
 
 register:
-  handler: src/infra/handler/auth/register.handler
+  handler: src/infra/handlers/auth/register.handler
   layers:
     - !Ref MongooseLayerLambdaLayer 
   events:
@@ -8,8 +8,8 @@ register:
         path: /register
         method: post
 
-login:
-  handler: src/infra/handler/auth/login.handler
+sign-in:
+  handler: src/infra/handlers/auth/sign-in.handler
   layers:
     - !Ref MongooseLayerLambdaLayer
   events:

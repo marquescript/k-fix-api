@@ -1,7 +1,7 @@
 
-getUser:
-  handler: src/infra/handler/user/get-user.handler
-  events:
-    - httpApi:
-        path: /user
-        method: get
+# getUser:
+#   handler: src/infra/handlers/user/get-user.handler
+#   events:
+#     - httpApi:
+#         path: /user
+#         method: get
