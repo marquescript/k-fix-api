@@ -9,14 +9,16 @@
   },
   "scripts": {
     "start": "sls offline start",
-    "deploy:dev": "sls deploy --stage dev",
-    "deploy:prod": "sls deploy --stage prod",
-    "remove:dev": "sls remove --stage dev"
+    "deploy:dev": "npm run install-layer-deps && sls deploy --stage dev",
+    "deploy:prod": "npm run install-layer-deps && sls deploy --stage prod",
+    "remove:dev": "sls remove --stage dev",
+    "install-layer-deps": "cd layers/mongooseLayer/nodejs && npm install --production"
   },
   "devDependencies": {
     "@types/aws-lambda": "^8.10.149",
     "@types/node": "^22.15.21",
     "esbuild": "^0.25.4",
+    "mongoose": "^8.15.0",
     "serverless-esbuild": "^1.55.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.8.3"
