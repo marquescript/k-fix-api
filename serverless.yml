@@ -7,6 +7,8 @@ provider:
   name: aws
   runtime: nodejs20.x
   region: us-east-1
+  environment:
+    MONGODB_URI: ${env:MONGODB_URI}
 
   #Configurações de HTTP API globai
   httpApi:
@@ -45,7 +47,7 @@ custom:
     user: functions/user.functions.yml
 
 layers:
-  MogooseLayer:
+  MongooseLayer:
     path: layers/mongooseLayer
     description: Layer com Mongoose e utilitario de conexao do MongoDB
     compatibleRuntimes:
