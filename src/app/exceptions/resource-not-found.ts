@@ -1,9 +1,9 @@
 
-export class ResourceNotFound extends Error {
+export class ResourceNotFoundException extends Error {
 
     constructor(message: string){
         super(message)
-        this.name = "ResourceNotFound"
+        this.name = "ResourceNotFoundException"
     }
 
 }

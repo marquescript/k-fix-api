@@ -1,5 +1,6 @@
 import { APIGatewayProxyEvent, APIGatewayProxyResult, Context, Handler } from "aws-lambda";
-import { ResourceNotFound } from "src/app/exceptions/resource-not-found";
+import { ResourceAlreadyExistsException } from "src/app/exceptions/resource-already-exists";
+import { ResourceNotFoundException } from "src/app/exceptions/resource-not-found";
 import { HttpStatus } from "src/app/utils/http-status";
 import { ZodError } from "zod";
 
@@ -23,13 +24,20 @@ export function globalErrorHandlerMiddleware(
             let message: string = "Internal server error"
             let details: any | undefined = undefined;
 
-            if(error instanceof ResourceNotFound){
+            if(error instanceof ResourceNotFoundException){
                 statusCode = HttpStatus.NOT_FOUND
                 message = error.message
             } else if (error instanceof ZodError){
                 statusCode = HttpStatus.BAD_REQUEST
                 message = "Invalid request body"
                 details = error.flatten().fieldErrors
+            } else if (error instanceof ResourceAlreadyExistsException){
+                statusCode = HttpStatus.CONFLICT
+                message = error.message
+            } else {
+                console.error(error)
+                statusCode = HttpStatus.INTERNAL_SERVER_ERROR
+                message = "Internal server error"
             }
             
             const responseBody = {

@@ -1,6 +1,6 @@
 import { ZodSchema, z } from "zod";
 import { APIGatewayProxyEventWithValidatedBody } from "../types/api-gateway";
-import { APIGatewayProxyEvent, APIGatewayProxyResult, Context, Handler } from "aws-lambda";
+import { APIGatewayProxyEvent, APIGatewayProxyResult, Context } from "aws-lambda";
 import { HttpStatus } from "src/app/utils/http-status";
 
 type ValidatedHandler<S extends ZodSchema> = (
