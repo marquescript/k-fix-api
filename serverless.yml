@@ -7,8 +7,15 @@ provider:
   name: aws
   runtime: nodejs20.x
   region: us-east-1
+  timeout: 15
   environment:
+    NODE_ENV: ${env:NODE_ENV}
     MONGODB_URI: ${env:MONGODB_URI}
+    MONGODB_URI_DEV: ${env:MONGODB_URI_DEV}
+    JWT_SECRET: ${env:JWT_SECRET}
+    JWT_REFRESH_SECRET: ${env:JWT_REFRESH_SECRET}
+    ACCESS_TOKEN_EXPIRES_IN: ${env:ACCESS_TOKEN_EXPIRES_IN}
+    REFRESH_TOKEN_EXPIRES_IN: ${env:REFRESH_TOKEN_EXPIRES_IN}
 
   #Configurações de HTTP API globai
   httpApi:
@@ -48,13 +55,6 @@ custom:
   handlerPaths:
     auth: functions/auth.functions.yml
     user: functions/user.functions.yml
-
-layers:
-  MongooseLayer:
-    path: layers/mongooseLayer
-    description: Layer com Mongoose e utilitario de conexao do MongoDB
-    compatibleRuntimes:
-      - nodejs20.x
 
 functions:
   - ${file(functions/auth.functions.yml)}
