@@ -11,7 +11,6 @@ const handlerJwtAuthorizer = async (
 
     try{
         if(!token) {
-            console.log('No token provided');
             throw new Error("Unauthorized")
         }
 
@@ -36,7 +35,6 @@ function generatePolicy(
     resource: string, 
     context?: any
 ): APIGatewayAuthorizerResult {
-    console.log('Generating policy with:', { principalId, effect, resource, context });
 
     const authResponse: APIGatewayAuthorizerResult = {
         principalId,
@@ -56,7 +54,6 @@ function generatePolicy(
         authResponse.context = context
     }
 
-    console.log('Generated policy:', JSON.stringify(authResponse, null, 2));
     return authResponse
 }
 
