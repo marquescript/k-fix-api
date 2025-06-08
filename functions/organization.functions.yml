@@ -1,0 +1,26 @@
+createOrganization:
+  handler: src/infra/handlers/organization/create-organization.handler
+  events:
+    - httpApi:
+        path: /organization
+        method: post
+        authorizer:
+          name: customAuthorizer
+
+sendOrganizationInvitation:
+  handler: src/infra/handlers/organization/send-organization-invitation.handler
+  events:
+    - httpApi:
+        path: /organization/invitation
+        method: post
+        authorizer:
+          name: customAuthorizer
+
+acceptOrganizationInvitation:
+  handler: src/infra/handlers/organization/accept-organization-invitation.handler
+  events:
+    - httpApi:
+        path: /organization/invitation/accept
+        method: post
+        authorizer:
+          name: customAuthorizer

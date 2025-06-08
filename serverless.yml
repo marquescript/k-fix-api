@@ -16,6 +16,18 @@ provider:
     JWT_REFRESH_SECRET: ${env:JWT_REFRESH_SECRET}
     ACCESS_TOKEN_EXPIRES_IN: ${env:ACCESS_TOKEN_EXPIRES_IN}
     REFRESH_TOKEN_EXPIRES_IN: ${env:REFRESH_TOKEN_EXPIRES_IN}
+    
+    #AWS SES
+    SENDER_EMAIL: ${env.SENDER_EMAIL}
+    AWS_NODEJS_CONNECTION_REUSE_ENABLED: '1' # Otimização de performance do SDK
+
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action:
+            - ses:SendEmail
+          Resource: ${env:ARN_SES_IDENTITY}
 
   #Configurações de HTTP API globai
   httpApi:
@@ -64,3 +76,4 @@ functions:
   - ${file(functions/authorizers.yml)}
   - ${file(functions/auth.functions.yml)}
   - ${file(functions/user.functions.yml)}
+  - ${file(functions/organization.functions.yml)}

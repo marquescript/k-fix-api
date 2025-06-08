@@ -1,6 +1,7 @@
 import { APIGatewayProxyEvent, APIGatewayProxyResult, Context, Handler } from "aws-lambda";
 import { ExternalServiceException } from "src/app/exceptions/external-service-exception";
 import { ForbiddenException } from "src/app/exceptions/forbidden-exception";
+import { InvalidInvitationException } from "src/app/exceptions/invalid-invitation-exception";
 import { ResourceAlreadyExistsException } from "src/app/exceptions/resource-already-exists";
 import { ResourceNotFoundException } from "src/app/exceptions/resource-not-found";
 import { HttpStatus } from "src/app/utils/http-status";
@@ -41,6 +42,9 @@ export function globalErrorHandlerMiddleware(
                 message = error.message
             } else if (error instanceof ForbiddenException) {
                 statusCode = HttpStatus.FORBIDDEN
+                message = error.message
+            } else if (error instanceof InvalidInvitationException) {
+                statusCode = HttpStatus.BAD_REQUEST
                 message = error.message
             } else {
                 console.error(error)

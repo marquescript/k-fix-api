@@ -62,7 +62,7 @@ export class SendOrganizationInvitationUseCase {
         const token = crypto.randomBytes(32).toString("hex")
 
         const invitationOrganization: InvitationOrganization = {
-            id: token,
+            token,
             guestEmail,
             status: InvitationStatus.PENDING,
             organizationId,

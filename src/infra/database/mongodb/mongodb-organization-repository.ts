@@ -5,15 +5,20 @@ import { Organization } from "src/domain/@types/organization";
 import UserOrganizationModel, { UserOrganizationDocument } from "./schemas/user-organization";
 import mongoose from "mongoose";
 import { User } from "src/domain/@types/user";
+import { InvitationOrganization } from "src/domain/@types/invitation-organization";
+import InvitationOrganizationModel, { InvitationOrganizationDocument } from "./schemas/invitation-organization";
+import { InvitationStatus } from "src/domain/@types/invitation-status";
 
 export class MongoDBOrganizationRepository implements OrganizationRepository {
 
     private readonly organization: Model<OrganizationDocument>
     private readonly userOrganization: Model<UserOrganizationDocument>
+    private readonly invitationOrganization: Model<InvitationOrganizationDocument>
 
     constructor(){
         this.organization = OrganizationModel
         this.userOrganization = UserOrganizationModel
+        this.invitationOrganization = InvitationOrganizationModel
     }
 
     async create(organization: Organization): Promise<Organization> {
@@ -53,6 +58,36 @@ export class MongoDBOrganizationRepository implements OrganizationRepository {
             organizationId
         }).lean()
         return !!userOrganization
+    }
+
+    async addUserToOrganization(invitationOrganization: InvitationOrganization, user: User): Promise<void> {
+        const session = await mongoose.startSession()
+
+        try{
+            session.startTransaction()
+
+            const userOrganization: UserOrganizationDocument = {
+                userId: user.id!,
+                organizationId: invitationOrganization.organizationId,
+                createdAt: new Date(),
+                updatedAt: new Date()
+            }
+            
+            await this.userOrganization.create([userOrganization], { session })
+
+            await this.invitationOrganization.updateOne(
+                { id: invitationOrganization.id }, 
+                { $set: { status: InvitationStatus.ACCEPTED } },
+                { session }
+            )
+
+            await session.commitTransaction()
+        } catch(error){
+            await session.abortTransaction()
+            throw error
+        } finally {
+            session.endSession()
+        }
     }
 
 }

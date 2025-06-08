@@ -4,6 +4,7 @@ import { InvitationOrganization } from "src/domain/@types/invitation-organizatio
 export type InvitationOrganizationDocument = Omit<InvitationOrganization, 'id'> & Document
 
 const schema = new Schema<InvitationOrganizationDocument>({
+    token: { type: String, required: true },
     guestEmail: { type: String, required: true },
     organizationId: { type: String, required: true },
     userWhoInvitedId: { type: String, required: true },
