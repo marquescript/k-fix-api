@@ -24,7 +24,7 @@ async function signIn(
     event: APIGatewayProxyEventWithValidatedBody<SignInInput>,
     _: Context
 ): Promise<APIGatewayProxyResult>{
-    winstonAdapter.info("SignInHandler.signIn", {
+    winstonAdapter.info("handlers.auth.signIn", {
         method: event.httpMethod,
         url: event.requestContext.domainName + event.requestContext.path,
         body: { email: event.validatedBody.email }

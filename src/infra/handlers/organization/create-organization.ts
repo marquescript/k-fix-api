@@ -22,7 +22,7 @@ const dbConnectionPromise = connectToMongoDB()
 async function createOrganization(
     event: APIGatewayProxyEventWithValidatedBody<CreateOrganizationRequest>
 ): Promise<APIGatewayProxyResult> {
-    winstonAdapter.info("SignInHandler.signIn", {
+    winstonAdapter.info("handlers.organization.createOrganization", {
         method: event.httpMethod,
         url: event.requestContext.domainName + event.requestContext.path,
         body: { 

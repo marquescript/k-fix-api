@@ -1,4 +1,6 @@
 import { APIGatewayProxyEvent, APIGatewayProxyResult, Context, Handler } from "aws-lambda";
+import { ExternalServiceException } from "src/app/exceptions/external-service-exception";
+import { ForbiddenException } from "src/app/exceptions/forbidden-exception";
 import { ResourceAlreadyExistsException } from "src/app/exceptions/resource-already-exists";
 import { ResourceNotFoundException } from "src/app/exceptions/resource-not-found";
 import { HttpStatus } from "src/app/utils/http-status";
@@ -33,6 +35,12 @@ export function globalErrorHandlerMiddleware(
                 details = error.flatten().fieldErrors
             } else if (error instanceof ResourceAlreadyExistsException){
                 statusCode = HttpStatus.CONFLICT
+                message = error.message
+            } else if (error instanceof ExternalServiceException){
+                statusCode = HttpStatus.BAD_GATEWAY
+                message = error.message
+            } else if (error instanceof ForbiddenException) {
+                statusCode = HttpStatus.FORBIDDEN
                 message = error.message
             } else {
                 console.error(error)

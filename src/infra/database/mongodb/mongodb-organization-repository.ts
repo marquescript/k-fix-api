@@ -4,6 +4,7 @@ import { Model } from "mongoose";
 import { Organization } from "src/domain/@types/organization";
 import UserOrganizationModel, { UserOrganizationDocument } from "./schemas/user-organization";
 import mongoose from "mongoose";
+import { User } from "src/domain/@types/user";
 
 export class MongoDBOrganizationRepository implements OrganizationRepository {
 
@@ -41,4 +42,17 @@ export class MongoDBOrganizationRepository implements OrganizationRepository {
             session.endSession()
         }
     }
+
+    async findById(id: string): Promise<Organization | null> {
+        return await this.organization.findById(id).lean()
+    }
+
+    async findUserExistsInOrganization(userId: string, organizationId: string): Promise<boolean> {
+        const userOrganization =  await this.userOrganization.findOne({
+            userId, 
+            organizationId
+        }).lean()
+        return !!userOrganization
+    }
+
 }

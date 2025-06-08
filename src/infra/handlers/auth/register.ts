@@ -25,7 +25,7 @@ async function register(
     event: APIGatewayProxyEventWithValidatedBody<RegisterInput>,
     _: Context
 ): Promise<APIGatewayProxyResult>{
-    winstonAdapter.info("SignInHandler.signIn", {
+    winstonAdapter.info("handlers.auth.register", {
         method: event.httpMethod,
         url: event.requestContext.domainName + event.requestContext.path,
         body: { 
