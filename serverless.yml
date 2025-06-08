@@ -31,10 +31,17 @@ provider:
         - PUT
         - DELETE
         - OPTIONS
+    authorizers:
+      customAuthorizer:
+        type: request
+        functionName: customAuthorizer
+        identitySource:
+          - "$request.header.Authorization"
 
 plugins:
-  - serverless-esbuild
   - serverless-offline
+  - serverless-esbuild
+  - serverless-dotenv-plugin
 
 custom:
   commonEnvVars:
@@ -43,19 +50,17 @@ custom:
   dotenv:
     path: .env
 
-  esbuild:
-    bundle: true
-    minify: false
-    sourcemap: true
-    exclude:
-      - aws-sdk
-    platform: node
-    concurrency: 10
-
-  handlerPaths:
-    auth: functions/auth.functions.yml
-    user: functions/user.functions.yml
+  build:
+    esbuild:
+      bundle: true
+      minify: false
+      sourcemap: true
+      exclude:
+        - aws-sdk
+      platform: node
+      concurrency: 10
 
 functions:
+  - ${file(functions/authorizers.yml)}
   - ${file(functions/auth.functions.yml)}
-  # - ${file(functions/user.functions.yml)}
+  - ${file(functions/user.functions.yml)}

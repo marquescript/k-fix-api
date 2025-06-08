@@ -1,4 +1,3 @@
-
 register:
   handler: src/infra/handlers/auth/register.handler
   events:

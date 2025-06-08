@@ -16,10 +16,12 @@ export class JsonWebTokenAdapter implements AuthenticationProvider {
     }
 
     verifyAccessToken(token: string): string {
-        return jwt.verify(token, env.JWT_SECRET as string) as string;
+        const decoded = jwt.verify(token, env.JWT_SECRET as string) as { sub: string };
+        return decoded.sub;
     }
 
     verifyRefreshToken(token: string): string {
-        return jwt.verify(token, env.JWT_REFRESH_SECRET as string) as string;
+        const decoded = jwt.verify(token, env.JWT_REFRESH_SECRET as string) as { sub: string };
+        return decoded.sub;
     }
 }

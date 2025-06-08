@@ -22,7 +22,7 @@ const winston = createLogger({
     ]
 })
 
-export class WinstonLogger implements LoggerProvider {
+export class WinstonAdapter implements LoggerProvider {
     info(message: string, context?: unknown): void {
         winston.info(message + this.stringify(context));
     }
@@ -46,4 +46,4 @@ export class WinstonLogger implements LoggerProvider {
     }
 }
 
-export const logger = new WinstonLogger()
+export const winstonAdapter = new WinstonAdapter()

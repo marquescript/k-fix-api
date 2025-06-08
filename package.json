@@ -14,10 +14,10 @@
   "scripts": {
     "validate-env": "node src/infra/config/validate-env.ts",
     "start": "dotenv -e .env  -- sls offline start",
-    "deploy:dev": "npm run install-layer-deps && sls deploy --stage dev",
-    "deploy:prod": "npm run install-layer-deps && sls deploy --stage prod",
+    "deploy:dev": "sls deploy --stage dev",
+    "deploy:prod": "sls deploy --stage prod",
     "remove:dev": "sls remove --stage dev",
-    "install-layer-deps": "cd layers/mongooseLayer/nodejs && npm install --production"
+    "tests:unit": ""
   },
   "devDependencies": {
     "@types/aws-lambda": "^8.10.149",
@@ -30,6 +30,7 @@
     "serverless-dotenv-plugin": "^6.0.0",
     "serverless-esbuild": "^1.55.0",
     "serverless-offline": "^13.3.3",
+    "serverless-openapi-documenter": "^0.0.113",
     "ts-node": "^10.9.2",
     "typescript": "^5.8.3"
   }
