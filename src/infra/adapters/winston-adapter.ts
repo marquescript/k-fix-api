@@ -7,18 +7,12 @@ const isProduction = env.NODE_ENV === "prod"
 const winston = createLogger({
     level: isProduction ? "info" : "debug",
     format: format.combine(
-        format.timestamp({ format: "YYYY-MM-DD HH:mm:ss" }),
+        format.timestamp(),
         format.errors({ stack: true }),
-        format.printf(({ timestamp, level, message, stack }) => {
-            return stack
-                ? `${timestamp} ${level}: ${message}\n${stack}`
-                : `${timestamp} ${level}: ${message}`
-        })
+        format.json()
     ),
     transports: [
         new transports.Console(),
-        new transports.File({ filename: "logs/error.log", level: "error" }),
-        new transports.File({ filename: "logs/combined.log" })
     ]
 })
 

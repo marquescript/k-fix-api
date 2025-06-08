@@ -28,6 +28,12 @@ provider:
           Action:
             - ses:SendEmail
           Resource: ${env:ARN_SES_IDENTITY}
+        - Effect: Allow
+          Action:
+            - "logs:CreateLogGroup"
+            - "logs:CreateLogStream"
+            - "logs:PutLogEvents"
+          Resource: "arn:aws:logs:*:*:*"
 
   #Configurações de HTTP API globai
   httpApi:
