@@ -90,4 +90,15 @@ export class MongoDBOrganizationRepository implements OrganizationRepository {
         }
     }
 
+    async findUserOrganizations(userId: string): Promise<Organization[]> {
+        const userOrganizations = await this.userOrganization.find({ userId })
+        const organizationIds = userOrganizations.map(org => org.organizationId)
+        if(organizationIds.length === 0) return []
+        const organizations = await this.organization.find({ _id: { $in: organizationIds } }).lean()
+        return organizations.map(org => ({
+            ...org,
+            id: org._id.toString()
+        }))
+    }
+
 }

@@ -24,3 +24,12 @@ acceptOrganizationInvitation:
         method: post
         authorizer:
           name: customAuthorizer
+
+listUserOrganizations:
+  handler: src/infra/handlers/organization/list-user-organizations.handler
+  events:
+    - httpApi:
+        path: /organization/list
+        method: get
+        authorizer:
+          name: customAuthorizer
