@@ -6,3 +6,12 @@ createFailure:
         method: post
         authorizer:
           name: customAuthorizer
+
+listFailures:
+  handler: src/infra/handlers/failure/list-failures.handler
+  events:
+    - httpApi:
+        path: /organization/{organizationId}/failures
+        method: get
+        authorizer:
+          name: customAuthorizer
