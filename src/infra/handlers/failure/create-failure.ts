@@ -17,7 +17,6 @@ const createFailureSchema = z.object({
     actualBehavior: z.string().min(1),
     tags: z.array(z.string()).min(1),
     criticalLevel: z.nativeEnum(CriticalLevel),
-    organizationId: z.string().min(1),
     userCreateId: z.string().min(1)
 })
 
@@ -32,21 +31,36 @@ async function createFailure(
         method: event.httpMethod,
         url: event.requestContext.domainName + event.requestContext.path,
         body: {
+            organizationId: event.pathParameters?.organizationId,
             title: event.validatedBody.title,
             description: event.validatedBody.description,
             expectedBehavior: event.validatedBody.expectedBehavior,
             actualBehavior: event.validatedBody.actualBehavior,
             tags: event.validatedBody.tags,
             criticalLevel: event.validatedBody.criticalLevel,
-            organizationId: event.validatedBody.organizationId,
             userCreateId: event.validatedBody.userCreateId
         }
     })
 
+    
+    const organizationId = event.pathParameters?.organizationId
+    
+    if (!organizationId) {
+        return {
+            statusCode: 400,
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                message: "ID of organization not provided"
+            })
+        }
+    }
+    
+    const { title, description, expectedBehavior, actualBehavior, tags, criticalLevel, userCreateId } = event.validatedBody
+    
     await dbConnectionPromise
-
-    const { title, description, expectedBehavior, actualBehavior, tags, criticalLevel, organizationId, userCreateId } = event.validatedBody
-
+    
     const failureRepository = new MongoDBFailureRepository()
     const organizationRepository = new MongoDBOrganizationRepository()
 

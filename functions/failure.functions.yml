@@ -2,7 +2,7 @@ createFailure:
   handler: src/infra/handlers/failure/create-failure.handler
   events:
     - httpApi:
-        path: /failures
+        path: /organizations/{organizationId}/failures
         method: post
         authorizer:
           name: customAuthorizer
