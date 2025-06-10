@@ -1,5 +1,5 @@
 import { InvitationOrganization } from "../@types/invitation-organization";
-import { InvitationStatus } from "../@types/invitation-status";
+import { InvitationStatus } from "../@types/enums/invitation-status";
 
 export interface InvitationOrganizationRepository {
 

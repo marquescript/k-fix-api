@@ -1,4 +1,4 @@
-import { InvitationStatus } from "./invitation-status";
+import { InvitationStatus } from "./enums/invitation-status";
 
 export interface InvitationOrganization {
 

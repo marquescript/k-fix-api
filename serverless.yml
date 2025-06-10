@@ -83,3 +83,4 @@ functions:
   - ${file(functions/auth.functions.yml)}
   - ${file(functions/user.functions.yml)}
   - ${file(functions/organization.functions.yml)}
+  - ${file(functions/failure.functions.yml)}

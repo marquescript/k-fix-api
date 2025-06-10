@@ -1,0 +1,8 @@
+createFailure:
+  handler: src/infra/handlers/failure/create-failure.handler
+  events:
+    - httpApi:
+        path: /failures
+        method: post
+        authorizer:
+          name: customAuthorizer

@@ -7,7 +7,7 @@ import { InvitationOrganizationRepository } from "src/domain/repository/invitati
 import { OrganizationRepository } from "src/domain/repository/organization-repository";
 import { UserRepository } from "src/domain/repository/user-repository";
 import crypto from "crypto";
-import { InvitationStatus } from "src/domain/@types/invitation-status";
+import { InvitationStatus } from "src/domain/@types/enums/invitation-status";
 import { EmailProvider } from "src/domain/providers/email-provider";
 import { ExternalServiceException } from "src/app/exceptions/external-service-exception";
 import { templateInvitationOrganizationEmail } from "src/app/utils/template-invitation-organization-email";

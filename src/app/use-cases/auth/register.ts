@@ -1,5 +1,5 @@
 import { ResourceAlreadyExistsException } from "src/app/exceptions/resource-already-exists";
-import { Role } from "src/domain/@types/role";
+import { Role } from "src/domain/@types/enums/role";
 import { User } from "src/domain/@types/user";
 import { AuthenticationProvider } from "src/domain/providers/authentication-provider";
 import { EncryptionProvider } from "src/domain/providers/encryption-provider";

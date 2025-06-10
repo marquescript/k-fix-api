@@ -1,7 +1,7 @@
 import { ForbiddenException } from "src/app/exceptions/forbidden-exception";
 import { InvalidInvitationException } from "src/app/exceptions/invalid-invitation-exception";
 import { ResourceNotFoundException } from "src/app/exceptions/resource-not-found";
-import { InvitationStatus } from "src/domain/@types/invitation-status";
+import { InvitationStatus } from "src/domain/@types/enums/invitation-status";
 import { LoggerProvider } from "src/domain/providers/logger-provider";
 import { InvitationOrganizationRepository } from "src/domain/repository/invitation-organization-repository";
 import { OrganizationRepository } from "src/domain/repository/organization-repository";

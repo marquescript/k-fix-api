@@ -7,7 +7,7 @@ import mongoose from "mongoose";
 import { User } from "src/domain/@types/user";
 import { InvitationOrganization } from "src/domain/@types/invitation-organization";
 import InvitationOrganizationModel, { InvitationOrganizationDocument } from "./schemas/invitation-organization";
-import { InvitationStatus } from "src/domain/@types/invitation-status";
+import { InvitationStatus } from "src/domain/@types/enums/invitation-status";
 
 export class MongoDBOrganizationRepository implements OrganizationRepository {
 
