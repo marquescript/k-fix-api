@@ -116,4 +116,8 @@ export class MongoDBFailureRepository implements FailureRepository {
         return failuresCount
     }
 
+    async findById(id: string): Promise<Failure | null> {
+        return await this.failure.findById(id).lean()
+    }
+
 }

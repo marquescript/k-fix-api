@@ -1,0 +1,8 @@
+createSolution:
+  handler: src/infra/handlers/solution/create-solution.handler
+  events:
+    - httpApi:
+        path: /organizations/{organizationId}/failures/{failureId}/solutions
+        method: post
+        authorizer:
+          name: customAuthorizer
