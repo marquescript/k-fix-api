@@ -15,5 +15,22 @@ export class MongoDBSolutionRepository implements SolutionRepository {
         const createdSolution = await this.solution.create(solution)
         return createdSolution
     }
+    
+    async findAll(failureId: string, page: number, limit: number): Promise<{ solutions: Solution[], total: number }> {
+        const skip = (page - 1) * limit;
+        
+        const [solutions, total] = await Promise.all([
+            this.solution.find({ failureId })
+                .skip(skip)
+                .limit(limit)
+                .sort({ createdAt: -1 }),
+            this.solution.countDocuments({ failureId })
+        ]);
+
+        return {
+            solutions,
+            total
+        };
+    }
 
 }

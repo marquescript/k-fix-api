@@ -6,3 +6,12 @@ createSolution:
         method: post
         authorizer:
           name: customAuthorizer
+
+listSolutions:
+  handler: src/infra/handlers/solution/list-solutions.handler
+  events:
+    - httpApi:
+        path: /organizations/{organizationId}/failures/{failureId}/solutions
+        method: get
+        authorizer:
+          name: customAuthorizer
