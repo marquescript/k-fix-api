@@ -9,5 +9,6 @@ export interface OrganizationRepository {
     findUserExistsInOrganization(userId: string, organizationId: string): Promise<boolean>
     addUserToOrganization(invitationOrganization: InvitationOrganization, user: User): Promise<void>
     findUserOrganizations(userId: string): Promise<Organization[]>
+    findUserOrganizationsCount(organizationsId: string[]): Promise<{ organizationId: string, count: number }[]>
 
 }

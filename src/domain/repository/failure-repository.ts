@@ -8,5 +8,6 @@ export interface FailureRepository {
     findFailuresCountAndResolvedCount(organizationId: string): Promise<{ failuresCount: number, resolvedCount: number }>
     findFailuresCountByTag(organizationId: string): Promise<{ tag: string, count: number }[]>
     findFailuresCountByMonth(organizationId: string): Promise<{ month: string, count: number }[]>
+    findFailuresCount(organizationsId: string[]): Promise<{ organizationId: string, failuresCount: number }[]>
 
 }

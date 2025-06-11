@@ -107,4 +107,13 @@ export class MongoDBFailureRepository implements FailureRepository {
         return months
     }
 
+    async findFailuresCount(organizationsId: string[]): Promise<{ organizationId: string, failuresCount: number }[]> {
+        const failuresCount = await this.failure.aggregate([
+            { $match: { organizationId: { $in: organizationsId } } },
+            { $group: { _id: "$organizationId", failuresCount: { $sum: 1 } } },
+            { $project: { _id: 0, organizationId: "$_id", failuresCount: 1 } }
+        ])
+        return failuresCount
+    }
+
 }

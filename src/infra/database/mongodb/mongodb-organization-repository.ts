@@ -101,4 +101,13 @@ export class MongoDBOrganizationRepository implements OrganizationRepository {
         }))
     }
 
+    async findUserOrganizationsCount(organizationsId: string[]): Promise<{ organizationId: string, count: number }[]> {
+        const organizationsCount = await this.userOrganization.aggregate([
+            { $match: { organizationId: { $in: organizationsId } } },
+            { $group: { _id: "$organizationId", count: { $sum: 1 } } },
+            { $project: { _id: 0, organizationId: "$_id", count: 1 } }
+        ])
+        return organizationsCount
+    }
+
 }
