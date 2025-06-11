@@ -9,6 +9,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    environment: HOMOLOG_ENV_FILE
 
     strategy:
       matrix:

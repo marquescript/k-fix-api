@@ -15,7 +15,7 @@
   "scripts": {
     "validate-env": "node src/infra/config/validate-env.ts",
     "start": "dotenv -e .env  -- sls offline start",
-    "deploy:dev": "sls deploy --stage dev",
+    "deploy:dev": "dotenv -e .env -- sls deploy --stage dev",
     "deploy:prod": "sls deploy --stage prod",
     "remove:dev": "sls remove --stage dev",
     "tests:unit": ""
