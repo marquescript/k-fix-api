@@ -15,3 +15,12 @@ listFailures:
         method: get
         authorizer:
           name: customAuthorizer
+
+getFailure:
+  handler: src/infra/handlers/failure/get-failure.handler
+  events:
+    - httpApi:
+        path: /organizations/{organizationId}/failures/{failureId}
+        method: get
+        authorizer:
+          name: customAuthorizer
