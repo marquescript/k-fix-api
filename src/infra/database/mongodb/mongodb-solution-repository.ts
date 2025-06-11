@@ -33,4 +33,9 @@ export class MongoDBSolutionRepository implements SolutionRepository {
         };
     }
 
+    async findById(solutionId: string): Promise<Solution | null> {
+        const solution = await this.solution.findById(solutionId).lean()
+        return solution
+    }
+
 }

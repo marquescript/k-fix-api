@@ -15,3 +15,12 @@ listSolutions:
         method: get
         authorizer:
           name: customAuthorizer
+
+getSolution:
+  handler: src/infra/handlers/solution/get-solution.handler
+  events:
+    - httpApi:
+        path: /organizations/{organizationId}/solutions/{solutionId}
+        method: get
+        authorizer:
+          name: customAuthorizer
