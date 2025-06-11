@@ -1,0 +1,34 @@
+name: HOMOLOG-DEPLOY
+
+on:
+  push:
+    branches: [ homolog ]
+  pull_request:
+    branches: [ homolog ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: 20.x
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Create environment file
+        run: |
+          echo "${{ secrets.HOMOLOG_ENV_FILE }}" > .env
+
+      - name: Deploy
+        run: npm run deploy:dev
