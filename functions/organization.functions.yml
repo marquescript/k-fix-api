@@ -33,3 +33,12 @@ listUserOrganizations:
         method: get
         authorizer:
           name: customAuthorizer
+
+reportOrganization:
+  handler: src/infra/handlers/organization/report-organization.handler
+  events:
+    - httpApi:
+        path: /organization/{organizationId}/report
+        method: get
+        authorizer:
+          name: customAuthorizer
