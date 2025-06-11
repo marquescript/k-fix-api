@@ -1,3 +1,4 @@
+import { ForbiddenException } from "src/app/exceptions/forbidden-exception";
 import { ResourceNotFoundException } from "src/app/exceptions/resource-not-found";
 import { FailureStatus } from "src/domain/@types/enums/failure-status";
 import { Failure } from "src/domain/@types/failure";
@@ -21,6 +22,10 @@ export class CreateFailureUseCase {
         const organization = await this.organizationRepository.findById(data.organizationId)
 
         if(!organization) throw new ResourceNotFoundException("Organization not found")
+
+        const userExistsInOrganization = await this.organizationRepository.findUserExistsInOrganization(data.userCreateId, data.organizationId)
+
+        if(!userExistsInOrganization) throw new ForbiddenException("User not found in organization")
 
         const dateNow = new Date()
 
