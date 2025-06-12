@@ -15,7 +15,7 @@ API desenvolvida em Node.js utilizando Serverless Framework, MongoDB e AWS Lambd
 Clone o repositório e instale as dependências:
 
 ```bash
-git clone https://github.com/seu-usuario/k-fix-api.git
+git clone https://github.com/marquescript/k-fix-api.git
 cd k-fix-api
 npm install
 ```
